@@ -167,7 +167,7 @@ function AddItem() {
         <div>
           <Card className="card">
             <CardBody key={item._id}>
-            <Heading size='xs'>Item : {index + 1}</Heading>
+            <Heading size='xs' className="itemN">Item : {index + 1}</Heading>
               <Heading size='xs'>Title : {item.title}</Heading>
               <Text>Description : {item.description}</Text>
             </CardBody>
