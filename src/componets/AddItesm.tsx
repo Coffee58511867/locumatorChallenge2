@@ -42,6 +42,7 @@ function AddItem() {
           duration: 9000,
           isClosable: true,
         });
+        setItems(items.concat(response.data));
       }
       if (!response) {
         toast({
@@ -85,15 +86,6 @@ function AddItem() {
       controller.abort();
     };
   }, []);
-
-  const getNewQuote = () => {
-    axios
-      .get("https://ionic-testing.onrender.com/api/v1/items")
-      .then(res => {
-        setItems(res.data);
-      })
-      .catch(err => console.log(err));
-  }
 
   return (
     <div>
@@ -141,7 +133,7 @@ function AddItem() {
                     fontWeight={800}
                     className="label"
                   >
-                    last name
+                    Description
                   </FormLabel>
                   <Input
                     placeholder="Description"
@@ -161,7 +153,6 @@ function AddItem() {
                   colorScheme="teal" 
                   type="submit"
                   isLoading={isSubmitting}
-                  onClick={getNewQuote}
                 >
                   Submit
                 </Button>
