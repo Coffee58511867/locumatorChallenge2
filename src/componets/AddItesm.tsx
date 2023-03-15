@@ -166,9 +166,10 @@ function AddItem() {
       {items.map((item: IItem, index) => (
         <div>
           <Card className="card">
-            <CardBody>
-              <Heading size='xs'>{item.title}</Heading>
-              <Text>{item.description}</Text>
+            <CardBody key={item._id}>
+            <Heading size='xs'>Item : {index + 1}</Heading>
+              <Heading size='xs'>Title : {item.title}</Heading>
+              <Text>Description : {item.description}</Text>
             </CardBody>
           </Card>
         </div>
