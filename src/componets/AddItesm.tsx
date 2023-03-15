@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import IItem from '../models/item.type'
+import React, { useEffect, useState } from "react";
+import IItem from "../models/item.type";
 import { useForm } from "react-hook-form";
 import {
   FormControl,
@@ -11,14 +11,16 @@ import {
   Box,
   Flex,
   useToast,
+  CardBody,
+  Text,
+  Card,
   Heading,
 } from "@chakra-ui/react";
 import "../styles/Error.css";
 import instance from "../api/api";
 import axios from "axios";
 
-function AddItem () {
-
+function AddItem() {
   const toast = useToast();
   const [items, setItems] = useState<IItem[]>([]);
   const {
@@ -26,7 +28,6 @@ function AddItem () {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<IItem>();
-
 
   const onSubmit = async (data: IItem) => {
     console.log(data);
@@ -36,8 +37,7 @@ function AddItem () {
         //do something
         toast({
           title: "Item created.",
-          description:
-            "Item added successfully.",
+          description: "Item added successfully.",
           status: "success",
           duration: 9000,
           isClosable: true,
@@ -46,8 +46,7 @@ function AddItem () {
       if (!response) {
         toast({
           title: "Item not created.",
-          description:
-            "Item not added. Please try again later.",
+          description: "Item not added. Please try again later.",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -58,8 +57,7 @@ function AddItem () {
       if (axios.isAxiosError(error)) {
         toast({
           title: "Item not created.",
-          description:
-            "Item not added. Please try again later.",
+          description: "Item not added. Please try again later.",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -68,9 +66,7 @@ function AddItem () {
       }
       return "An unexpected error occurred";
     }
-
-  }
-
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -92,8 +88,7 @@ function AddItem () {
 
   return (
     <div>
-
-<Flex
+      <Flex
         w="full"
         h="full"
         p={10}
@@ -112,15 +107,11 @@ function AddItem () {
               ml={[0, 0, 50]}
             >
               <GridItem colSpan={{ base: 2, md: 1 }}>
-              <Heading mb="5" size="lg">
-              Add Items
-            </Heading>
+                <Heading mb="5" size="lg">
+                  Add Items
+                </Heading>
                 <FormControl isRequired>
-                  <FormLabel
-                    htmlFor="title"
-                    fontWeight={800}
-                    className="label"
-                  >
+                  <FormLabel htmlFor="title" fontWeight={800} className="label">
                     Title
                   </FormLabel>
                   <Input
@@ -128,7 +119,7 @@ function AddItem () {
                     placeholder="Title"
                     {...register("title", {
                       required: "Item title is required",
-                                  })}
+                    })}
                   />
                   {errors?.title && (
                     <p className="error">{errors.title.message}</p>
@@ -158,28 +149,30 @@ function AddItem () {
                   size="lg"
                   w="full"
                   mt="2rem"
-                  colorScheme='teal'
+                  colorScheme="teal"
                   type="submit"
                   isLoading={isSubmitting}
                 >
                   Submit
                 </Button>
               </GridItem>
+            </SimpleGrid>
+          </form>
+        </Box>
+      </Flex>
 
-       </SimpleGrid>
-       </form>
-       </Box>
-       </Flex>
-
-       {items.map((item: IItem, index) => (
-                 <div>
-                 <h2>Title:{item.title}</h2>
-                 <h2>Descrription:{item.description}</h2>
-            </div>
-       ))}
-      
+      {items.map((item: IItem, index) => (
+        <div>
+          <Card>
+            <CardBody>
+              <Heading size='xs'>{item.title}</Heading>
+              <Text>{item.description}</Text>
+            </CardBody>
+          </Card>
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 
 export default AddItem;
