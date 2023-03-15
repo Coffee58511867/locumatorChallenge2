@@ -111,11 +111,11 @@ function AddItem() {
               ml={[0, 0, 50]}
             >
               <GridItem colSpan={{ base: 2, md: 1 }}>
-                <Heading mb="5" size="lg">
-                  Add Items
+                <Heading mb="5" size="lg" fontWeight={500}>
+                 <u>Add Item to List</u> 
                 </Heading>
                 <FormControl isRequired>
-                  <FormLabel htmlFor="title" fontWeight={800} className="label">
+                  <FormLabel htmlFor="title" fontWeight={600} className="label">
                     Title
                   </FormLabel>
                   <Input
@@ -133,7 +133,7 @@ function AddItem() {
                 <FormControl isRequired>
                   <FormLabel
                     htmlFor="description"
-                    fontWeight={800}
+                    fontWeight={600}
                     className="label"
                   >
                     Description
@@ -165,6 +165,7 @@ function AddItem() {
         </Box>
       </Flex>
 
+      <Heading size="md" fontWeight={600}>All Added Items Below</Heading>  
       {items.map((item: IItem, index) => (
         <div>
           <Card className="card">
@@ -172,7 +173,7 @@ function AddItem() {
               <Heading size="xs" className="itemN">
                 Item : {index + 1}
               </Heading>
-              <Heading size="xs">Title : {item.title}</Heading>
+              <Heading size="xs" fontWeight={500}>Title : {item.title}</Heading>
               <Text>Description : {item.description}</Text>
             </CardBody>
           </Card>
