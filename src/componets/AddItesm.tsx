@@ -25,6 +25,7 @@ function AddItem() {
   const [items, setItems] = useState<IItem[]>([]);
   const {
     register,
+    resetField,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<IItem>();
@@ -43,6 +44,8 @@ function AddItem() {
           isClosable: true,
         });
         setItems(items.concat(response.data));
+        resetField("title")
+        resetField("description")
       }
       if (!response) {
         toast({
