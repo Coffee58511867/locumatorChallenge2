@@ -86,6 +86,15 @@ function AddItem() {
     };
   }, []);
 
+  const getNewQuote = () => {
+    axios
+      .get("https://ionic-testing.onrender.com/api/v1/items")
+      .then(res => {
+        setItems(res.data);
+      })
+      .catch(err => console.log(err));
+  }
+
   return (
     <div>
       <Flex
@@ -149,9 +158,10 @@ function AddItem() {
                   size="lg"
                   w="full"
                   mt="2rem"
-                  colorScheme="teal"
+                  colorScheme="teal" 
                   type="submit"
                   isLoading={isSubmitting}
+                  onClick={getNewQuote}
                 >
                   Submit
                 </Button>
