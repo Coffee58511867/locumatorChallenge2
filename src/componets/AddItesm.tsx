@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import IItem from '../models/item.type'
 import { useForm } from "react-hook-form";
 import {
@@ -14,13 +14,13 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import "../styles/Error.css";
-import Items from "../Items.json"
 import instance from "../api/api";
 import axios from "axios";
 
 function AddItem () {
 
   const toast = useToast();
+  const [items, setItems] = useState<IItem[]>([]);
   const {
     register,
     handleSubmit,
@@ -47,7 +47,7 @@ function AddItem () {
         toast({
           title: "Item not created.",
           description:
-            "Sorry your registration was not successful. Please try again later.",
+            "Item not added. Please try again later.",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -59,7 +59,7 @@ function AddItem () {
         toast({
           title: "Item not created.",
           description:
-            "Sorry your registration was not successful. Please try again later.",
+            "Item not added. Please try again later.",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -72,6 +72,23 @@ function AddItem () {
   }
 
 
+  useEffect(() => {
+    const controller = new AbortController();
+    let dataFetched = false;
+
+    async function fetchAllItems() {
+      if (!dataFetched) {
+        const response = await instance.get("/api/v1/items");
+        console.log(response.data);
+        setItems(response.data);
+      }
+    }
+    fetchAllItems();
+    return () => {
+      dataFetched = true;
+      controller.abort();
+    };
+  }, []);
 
   return (
     <div>
@@ -154,14 +171,12 @@ function AddItem () {
        </Box>
        </Flex>
 
-       {Items.map((item) => 
-       (
-        <div>
-             <h2>Title:{item.title}</h2>
-             <h2>Title:{item.description}</h2>
-        </div>
-       )
-       )}
+       {items.map((item: IItem, index) => (
+                 <div>
+                 <h2>Title:{item.title}</h2>
+                 <h2>Descrription:{item.description}</h2>
+            </div>
+       ))}
       
     </div>
   )
