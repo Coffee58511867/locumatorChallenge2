@@ -43,6 +43,7 @@ function AddItem() {
           isClosable: true,
         });
         setItems(items.concat(response.data));
+        
       }
       if (!response) {
         toast({
@@ -164,7 +165,7 @@ function AddItem() {
 
       {items.map((item: IItem, index) => (
         <div>
-          <Card>
+          <Card className="card">
             <CardBody>
               <Heading size='xs'>{item.title}</Heading>
               <Text>{item.description}</Text>
