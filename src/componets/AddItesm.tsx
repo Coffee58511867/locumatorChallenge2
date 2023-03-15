@@ -43,7 +43,6 @@ function AddItem() {
           isClosable: true,
         });
         setItems(items.concat(response.data));
-        
       }
       if (!response) {
         toast({
@@ -151,7 +150,7 @@ function AddItem() {
                   size="lg"
                   w="full"
                   mt="2rem"
-                  colorScheme="teal" 
+                  colorScheme="teal"
                   type="submit"
                   isLoading={isSubmitting}
                 >
@@ -167,8 +166,10 @@ function AddItem() {
         <div>
           <Card className="card">
             <CardBody key={item._id}>
-            <Heading size='xs' className="itemN">Item : {index + 1}</Heading>
-              <Heading size='xs'>Title : {item.title}</Heading>
+              <Heading size="xs" className="itemN">
+                Item : {index + 1}
+              </Heading>
+              <Heading size="xs">Title : {item.title}</Heading>
               <Text>Description : {item.description}</Text>
             </CardBody>
           </Card>
