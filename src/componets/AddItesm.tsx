@@ -16,7 +16,7 @@ import {
   Card,
   Heading,
 } from "@chakra-ui/react";
-import "../styles/Error.css";
+import "../styles/Errors.scss";
 import instance from "../api/api";
 import axios from "axios";
 
